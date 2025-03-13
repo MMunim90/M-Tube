@@ -1,40 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>M-Tube</title>
-    <link rel="icon" type="image/png" href="assets/tube logo.png">
+    <link rel="icon" type="image/png" href="assets/tube logo.png" />
 
     <!-- daisyUI setup -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body>
+
+    <!-- fonts  setup -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      .font-inter {
+        font-family: "Inter", sans-serif;
+      }
+      .active {
+        background-color: #ff1f3d;
+      }
+    </style>
+  </head>
+  <body class="font-inter">
     <header>
-        <nav class="w-11/12 mx-auto flex justify-between border-b-2 py-5 items-center border-[#17171720]">
-            <div class="logo">
-                <img class="w-[120px]" src="assets/Logo.png" alt="M-Tube Logo">
-            </div>
-            <div class="sort">
-                <button class="btn bg-[#25252550] text-white">Sort by View</button>
-            </div>
-            <div class="blogs">
-                <button class="btn bg-[#FF1F3D] text-white">Blogs</button>
-            </div>
-        </nav>
+      <nav
+        class="w-11/12 mx-auto flex justify-between border-b-2 py-5 items-center border-[#17171720]"
+      >
+        <div class="logo">
+          <img class="w-[120px]" src="assets/Logo.png" alt="M-Tube Logo" />
+        </div>
+        <div class="sort">
+          <button class="btn bg-[#25252550] text-white">Sort by View</button>
+        </div>
+        <div class="blogs">
+          <button class="btn bg-[#FF1F3D] text-white">Blogs</button>
+        </div>
+      </nav>
     </header>
 
     <nav id="category-container" class="flex py-5 justify-center gap-5">
-        <div>
-            <button class="btn btn-sm bg-[#FF1F3D] text-white">All</button>
-        </div>
+      <div>
+        <button
+          onclick="loadVideos()"
+          class="btn btn-sm bg-[#FF1F3D] text-white"
+        >
+          All
+        </button>
+      </div>
     </nav>
 
-    <section class="w-11/12 mx-auto grid grid-cols-4 gap-5" id="video-container">
-        
+    <section
+      class="w-11/12 mx-auto grid grid-cols-4 gap-5"
+      id="video-container"
+    >
+      <div class="col-span-full flex flex-col text-center justify-center items-center py-20">
+        <img class="w-[120px]" src="assets/Icon.png" alt="" />
+        <h1 class="text-2xl font-bold">Oops!! Sorry, There is no <br> content here</h1>
+      </div>
     </section>
 
     <script src="scripts/index.js"></script>
-</body>
+  </body>
 </html>

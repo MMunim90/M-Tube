@@ -16,6 +16,18 @@ function loadVideos() {
     .then((data) => displayVideos(data.videos));
 }
 
+const loadCategoryVideos = (id) => {
+    const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            const clickedButton = document.getElementById(`btn-${id}`);
+            clickedButton.classList.add("active");
+            console.log(clickedButton);
+            displayVideos(data.category)
+        });
+};
+
 function displayCategories(categories) {
   //get the container
   const categoryContainer = document.getElementById("category-container");
@@ -25,7 +37,7 @@ function displayCategories(categories) {
     //create a element
     const categoryDiv = document.createElement("div");
     categoryDiv.innerHTML = `
-        <button class="btn btn-sm bg-[#25252550] text-white hover:bg-[#FF1F3D]">${cat.category}</button>
+        <button id="btn-${cat.category_id}" onclick="loadCategoryVideos(${cat.category_id})" class="btn btn-sm bg-[#25252550] text-white hover:bg-[#FF1F3D]">${cat.category}</button>
         `;
 
     //append the element to the container
@@ -35,6 +47,20 @@ function displayCategories(categories) {
 
 const displayVideos = (videos) => {
   const videosContainer = document.getElementById("video-container");
+
+  videosContainer.innerHTML = "";
+
+if(videos.length === 0){
+    videosContainer.innerHTML = `
+     <div class="col-span-full flex flex-col text-center justify-center items-center py-20">
+        <img class="w-[120px]" src="assets/Icon.png" alt="" />
+        <h1 class="text-2xl font-bold">Oops!! Sorry, There is no <br> content here</h1>
+      </div>
+    `;
+    return;
+}
+
+
   videos.forEach((video) => {
     const videoCard = document.createElement("div");
     videoCard.innerHTML = `
@@ -66,5 +92,4 @@ const displayVideos = (videos) => {
   });
 };
 
-loadVideos();
 loadCategories();
