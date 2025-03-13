@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Tube</title>
+    <link rel="icon" type="image/png" href="assets/tube logo.png">
+
+    <!-- daisyUI setup -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <header>
+        <nav class="w-11/12 mx-auto flex justify-between border-b-2 py-5 items-center border-[#17171720]">
+            <div class="logo">
+                <img class="w-[120px]" src="assets/Logo.png" alt="M-Tube Logo">
+            </div>
+            <div class="sort">
+                <button class="btn bg-[#25252550] text-white">Sort by View</button>
+            </div>
+            <div class="blogs">
+                <button class="btn bg-[#FF1F3D] text-white">Blogs</button>
+            </div>
+        </nav>
+    </header>
+
+    <nav id="category-container" class="flex py-5 justify-center gap-5">
+        <div>
+            <button class="btn btn-sm bg-[#FF1F3D] text-white">All</button>
+        </div>
+    </nav>
+
+
+    <script src="scripts/index.js"></script>
+</body>
+</html>
