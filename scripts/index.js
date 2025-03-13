@@ -1,5 +1,16 @@
 alert("Welcome to M-Tube");
 
+const showLoader = () => {
+    document.getElementById("loader").classList.remove("hidden");
+    document.getElementById("video-container").classList.add("hidden");
+}
+
+const hideLoader = () => {
+    document.getElementById("loader").classList.add("hidden");
+    document.getElementById("video-container").classList.remove("hidden");
+}
+
+
 function removeActiveClass() {
     const activeButtons = document.getElementsByClassName("active");
     for(let btn of activeButtons){
@@ -17,8 +28,9 @@ function loadCategories() {
     .then((data) => displayCategories(data.categories));
 }
 
-function loadVideos() {
-  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+function loadVideos(searchText = "") {
+    showLoader();
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
     .then((response) => response.json())
     .then((data) => {
         removeActiveClass();
@@ -28,6 +40,7 @@ function loadVideos() {
 }
 
 const loadCategoryVideos = (id) => {
+    showLoader();
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
 
     fetch(url)
@@ -98,6 +111,7 @@ if(videos.length === 0){
         <h1 class="text-2xl font-bold">Oops!! Sorry, There is no <br> content here</h1>
       </div>
     `;
+    hideLoader();
     return;
 }
 
@@ -121,7 +135,7 @@ if(videos.length === 0){
               <div class="title">
                 <h2 class="text-base font-semibold">${video.title}</h2>
                 <p class="text-sm text-gray-500 flex gap-1">${video.authors[0].profile_name}
-                    <img class="w-5 h-5" src="https://img.icons8.com/?size=100&id=FNbnqlDTjR45&format=png&color=000000" alt="">
+                ${video.authors[0].verified == true ? `<img class="w-5 h-5" src="https://img.icons8.com/?size=100&id=FNbnqlDTjR45&format=png&color=000000" alt="">` : ``}
                 </p>
                 <p class="text-sm text-gray-500">${video.others.views}</p>
               </div>
@@ -131,6 +145,12 @@ if(videos.length === 0){
         `;
     videosContainer.appendChild(videoCard);
   });
+  hideLoader();
 };
+
+document.getElementById("search-input").addEventListener("keyup", (e) => {
+    const input = e.target.value;
+    loadVideos(input);
+})
 
 loadCategories();

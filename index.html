@@ -40,10 +40,13 @@
           <img class="w-[120px]" src="assets/Logo.png" alt="M-Tube Logo" />
         </div>
         <div class="sort">
-          <button class="btn bg-[#25252550] text-white">Sort by View</button>
+            <label class="input">
+                <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
+                <input id="search-input" type="search" required placeholder="Search"/>
+              </label>
         </div>
         <div class="blogs">
-          <button class="btn bg-[#FF1F3D] text-white">Blogs</button>
+          <button class="btn bg-[#FF1F3D] text-white">Sort</button>
         </div>
       </nav>
     </header>
@@ -58,6 +61,10 @@
       </div>
     </nav>
 
+    <section id="loader" class="text-center py-56 hidden">
+        <span class="loading loading-spinner loading-xl"></span>
+    </section>
+
     <section
       class="w-11/12 mx-auto grid grid-cols-4 gap-5"
       id="video-container"
@@ -68,9 +75,6 @@
       </div>
     </section>
 
-
-    <!-- Open the modal using ID.showModal() method -->
-<!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
 <dialog id="video_details" class="modal">
   <div class="modal-box">
     <div id="details-container">
