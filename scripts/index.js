@@ -1,5 +1,12 @@
 alert("Welcome to M-Tube");
 
+function removeActiveClass() {
+    const activeButtons = document.getElementsByClassName("active");
+    for(let btn of activeButtons){
+        btn.classList.remove("active");
+    }
+}
+
 function loadCategories() {
   // 1-fetch the data
   fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -13,20 +20,54 @@ function loadCategories() {
 function loadVideos() {
   fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then((response) => response.json())
-    .then((data) => displayVideos(data.videos));
+    .then((data) => {
+        removeActiveClass();
+        document.getElementById("btn-all").classList.add("active");
+        displayVideos(data.videos);
+    });
 }
 
 const loadCategoryVideos = (id) => {
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
+
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
+            removeActiveClass();
             const clickedButton = document.getElementById(`btn-${id}`);
             clickedButton.classList.add("active");
-            console.log(clickedButton);
             displayVideos(data.category)
+
         });
 };
+
+const loadVideoDetails = (videoId) => {
+    const url = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
+
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayVideoDetails(data.video));
+}
+
+const displayVideoDetails = (video) => {
+    document.getElementById("video_details").showModal();
+    const detailContainer = document.getElementById("details-container");
+
+    detailContainer.innerHTML = `
+    <div class="card bg-base-100 image-full shadow-sm">
+  <figure>
+    <img
+      src="${video.thumbnail}"
+      alt="Shoes" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title text-2xl font-extrabold">${video.title}</h2>
+    <p>${video.description}</p>
+    <img src="${video.authors[0].profile_picture}" alt="${video.authors[0].profile_name}" />
+  </div>
+</div>
+    `;
+}
 
 function displayCategories(categories) {
   //get the container
@@ -85,10 +126,10 @@ if(videos.length === 0){
                 <p class="text-sm text-gray-500">${video.others.views}</p>
               </div>
             </div>
+            <button onclick="loadVideoDetails('${video.video_id}')" class="btn btn-block">More</button>
           </div>
         `;
     videosContainer.appendChild(videoCard);
-    console.log(video)
   });
 };
 

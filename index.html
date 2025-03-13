@@ -50,9 +50,8 @@
 
     <nav id="category-container" class="flex py-5 justify-center gap-5">
       <div>
-        <button
-          onclick="loadVideos()"
-          class="btn btn-sm bg-[#FF1F3D] text-white"
+        <button id="btn-all" onclick="loadVideos()"
+          class="btn btn-sm"
         >
           All
         </button>
@@ -68,6 +67,22 @@
         <h1 class="text-2xl font-bold">Oops!! Sorry, There is no <br> content here</h1>
       </div>
     </section>
+
+
+    <!-- Open the modal using ID.showModal() method -->
+<!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+<dialog id="video_details" class="modal">
+  <div class="modal-box">
+    <div id="details-container">
+
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 
     <script src="scripts/index.js"></script>
   </body>
